@@ -1,4 +1,8 @@
 #!/bin/bash
+
+NC='\033[0m'
+CYAN='\033[0;36m'
+
 read -p "Enter your wallet address: " WALLET_ADDRESS
 read -p "Enter your email address: " EMAIL_ADDRESS
 read -p "Enter your IP address or DDNS name: " IP_ADDRESS_OR_DNS_NAME
@@ -27,3 +31,6 @@ chmod +x /root/storj.sh
 echo '@reboot bash -c "/root/storj.sh"' >> /etc/crontab
 
 bash -c "/root/storj.sh"
+
+IPADDR=$(ip a | grep "192\|10\|172" | awk '{print $2}' | awk '/^192|^10/' | sed 's/\/.*//')
+printf "All done. Go and checkout your dashboard at: ${CYAN}https://${IPADDR}:14002${NC} \n"
