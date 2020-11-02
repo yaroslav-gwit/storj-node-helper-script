@@ -25,3 +25,5 @@ EOF
 
 chmod +x /root/storj.sh
 echo '@reboot bash -c "/root/storj.sh"' >> /etc/crontab
+
+bash -c "/root/storj.sh"
