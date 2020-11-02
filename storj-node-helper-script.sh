@@ -33,4 +33,4 @@ echo '@reboot bash -c "/root/storj.sh"' >> /etc/crontab
 bash -c "/root/storj.sh"
 
 IPADDR=$(ip a | grep "192\|10\|172" | awk '{print $2}' | awk '/^192|^10/' | sed 's/\/.*//')
-printf "All done. Go and checkout your dashboard at: ${CYAN}https://${IPADDR}:14002${NC} \n"
+printf "All done. Go and checkout your dashboard at: ${CYAN}http://${IPADDR}:14002${NC} \n"
