@@ -1,11 +1,8 @@
 #!/bin/bash
-NC='\033[0m'
-CYAN='\033[0;36m'
-
 read -p "Enter your wallet address: " WALLET_ADDRESS
 read -p "Enter your email address: " EMAIL_ADDRESS
 read -p "Enter your IP address or DDNS name: " IP_ADDRESS_OR_DNS_NAME
-read -p "How much storage are you willing to share? Example: 700GB" HOW_MUCH_STORAGE_TO_SHARE_IN_GB
+read -p "How much storage are you willing to share? Example: 700GB " HOW_MUCH_STORAGE_TO_SHARE_IN_GB
 read -p "Where is your storage folder located? " STORAGE_PATH
 
 if [[ $WALLET_ADDRESS != '' ]] && [[ $EMAIL_ADDRESS != '' ]] && [[ $IP_ADDRESS_OR_DNS_NAME != '' ]] && [[ $HOW_MUCH_STORAGE_TO_SHARE_IN_GB != '' ]] && [[ $STORAGE_PATH != '' ]]; then
@@ -25,3 +22,6 @@ docker rm watchtower
 docker pull storjlabs/watchtower
 docker run -d --restart=always --name watchtower -v /var/run/docker.sock:/var/run/docker.sock storjlabs/watchtower storagenode watchtower --stop-timeout 300s --interval 21600
 EOF
+
+chmod +x /root/storj.sh
+echo '@reboot bash -c "/root/storj.sh"' >> /etc/crontab
