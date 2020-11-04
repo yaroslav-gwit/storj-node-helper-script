@@ -15,7 +15,7 @@ elif if [[ $WALLET_ADDRESS = '' ]] || [[ $EMAIL_ADDRESS = '' ]] || [[ $IP_ADDRES
         printf "Mate, you can't run a script this way, please enter all the arguments." && exit
 fi
 
-cat EOF<< | cat > /root/storj.sh
+cat << EOF | cat > /root/storj.sh
 docker stop storagenode
 docker rm storagenode
 docker pull storjlabs/storagenode:latest
