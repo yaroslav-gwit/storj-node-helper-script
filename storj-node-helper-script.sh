@@ -12,7 +12,7 @@ read -p "Where is your storage folder located? " STORAGE_PATH
 if [[ $WALLET_ADDRESS != '' ]] && [[ $EMAIL_ADDRESS != '' ]] && [[ $IP_ADDRESS_OR_DNS_NAME != '' ]] && [[ $HOW_MUCH_STORAGE_TO_SHARE_IN_GB != '' ]] && [[ $STORAGE_PATH != '' ]]; then
         printf "You've entered: \n\n${CYAN}$WALLET_ADDRESS${NC}\n${CYAN}$EMAIL_ADDRESS${NC}\n${CYAN}$IP_ADDRESS_OR_DNS_NAME${NC}\n${CYAN}$HOW_MUCH_STORAGE_TO_SHARE_IN_GB${NC}\n${CYAN}${STORAGE_PATH}${NC}\n\nPress CTRL+C if this doesn't look right.\n" && read -p "Or just press enter to continue." && printf "\n\n"
 elif [[ $WALLET_ADDRESS = '' ]] || [[ $EMAIL_ADDRESS = '' ]] || [[ $IP_ADDRESS_OR_DNS_NAME = '' ]] || [[ $HOW_MUCH_STORAGE_TO_SHARE_IN_GB = '' ]] || [[ $STORAGE_PATH = '' ]]; then
-        printf "Mate, you can't run a script this way, please enter all variables.\n" && exit
+        printf "Mate, you can't run the script this way, please enter all variables.\n" && exit
 fi
 
 cat << EOF | cat > /root/storj.sh
