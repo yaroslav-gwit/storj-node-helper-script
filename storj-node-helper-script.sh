@@ -20,6 +20,8 @@ docker run -d --rm -e SETUP="true" \
     --mount type=bind,source="${STORAGE_PATH}",destination=/app/config \
     --name storagenode storjlabs/storagenode:latest
 
+sleep 15
+
 cat << EOF | cat > /root/storj.sh
 docker stop storagenode &> /dev/null
 docker rm storagenode &> /dev/null
