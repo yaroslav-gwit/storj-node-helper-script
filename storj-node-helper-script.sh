@@ -7,13 +7,18 @@ read -p "Enter your wallet address: " WALLET_ADDRESS
 read -p "Enter your email address: " EMAIL_ADDRESS
 read -p "Enter your IP address or DDNS name: " IP_ADDRESS_OR_DNS_NAME
 read -p "How much storage are you willing to share? Example: 700GB   " HOW_MUCH_STORAGE_TO_SHARE_IN_GB
-read -p "Where is your storage folder located? " STORAGE_PATH
+read -p "Where is your storage folder located? Example: /storj/  " STORAGE_PATH
 
 if [[ $WALLET_ADDRESS != '' ]] && [[ $EMAIL_ADDRESS != '' ]] && [[ $IP_ADDRESS_OR_DNS_NAME != '' ]] && [[ $HOW_MUCH_STORAGE_TO_SHARE_IN_GB != '' ]] && [[ $STORAGE_PATH != '' ]]; then
         printf "You've entered: \n\n${CYAN}$WALLET_ADDRESS${NC}\n${CYAN}$EMAIL_ADDRESS${NC}\n${CYAN}$IP_ADDRESS_OR_DNS_NAME${NC}\n${CYAN}$HOW_MUCH_STORAGE_TO_SHARE_IN_GB${NC}\n${CYAN}${STORAGE_PATH}${NC}\n\nPress CTRL+C if this doesn't look right.\n" && read -p "Or just press enter to continue." && printf "\n\n"
 elif [[ $WALLET_ADDRESS = '' ]] || [[ $EMAIL_ADDRESS = '' ]] || [[ $IP_ADDRESS_OR_DNS_NAME = '' ]] || [[ $HOW_MUCH_STORAGE_TO_SHARE_IN_GB = '' ]] || [[ $STORAGE_PATH = '' ]]; then
         printf "Mate, you can't run the script this way, please enter all variables.\n" && exit
 fi
+
+docker run -d --rm -e SETUP="true" \
+    --mount type=bind,source="/root/.local/share/storj/identity/storagenode/",destination=/app/identity \
+    --mount type=bind,source="${STORAGE_PATH}",destination=/app/config \
+    --name storagenode storjlabs/storagenode:latest
 
 cat << EOF | cat > /root/storj.sh
 docker stop storagenode &> /dev/null
